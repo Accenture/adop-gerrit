@@ -13,6 +13,7 @@ if [ "$1" = '/var/gerrit/gerrit-start.sh' ]; then
   #Customize gerrit.config
 
   #Section gerrit
+  [ -z "${REPO_PATH}" ] || git config -f "${GERRIT_SITE}/etc/gerrit.config" gerrit.basePath "${REPO_PATH}"
   [ -z "${WEBURL}" ] || git config -f "${GERRIT_SITE}/etc/gerrit.config" gerrit.canonicalWebUrl "${WEBURL}"
 
   #Section database
