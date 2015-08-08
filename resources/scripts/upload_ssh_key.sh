@@ -52,7 +52,7 @@ done
 
 echo "Retrieving value: ${key}"
 consul_response=$(curl -s -X GET "http://${consul_host}:${consul_port}/v1/kv/${key}")
-value=$(echo "${consul_response}" | ./jq -r '.[]|.Value' | base64 --decode)
+value=$(echo "${consul_response}" | jq -r '.[]|.Value' | base64 --decode)
 
 echo "Checking if \"${user}\" exists"
 if curl -sL -w "%{http_code}\\n" "http://localhost:8080/gerrit/accounts/${user}" -o /dev/null | grep "404" &> /dev/null; then
