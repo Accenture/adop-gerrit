@@ -4,20 +4,26 @@ set -e
 # Usage
 usage() {
     echo "Usage:"
-    echo "    ${0} -c <CONSUL_HOST> -p <CONSUL_PORT> -k <KEY> -u <USER>"
+    echo "    ${0} -c <CONSUL_HOST> -p <CONSUL_PORT> -A <ADMIN_USER> -P <ADMIN_PASSWORD> -k <KEY> -u <USER>"
     exit 1
 }
 
 # Constants
 SLEEP_TIME=5
 
-while getopts "c:p:k:u:" opt; do
+while getopts "c:p:A:P:k:u:" opt; do
   case $opt in
     c)
       consul_host=${OPTARG}
       ;;
     p)
       consul_port=${OPTARG}
+      ;;
+    A)
+      admin_user=${OPTARG}
+      ;;
+    P)
+      admin_password=${OPTARG}
       ;;
     k)
       key=${OPTARG}
@@ -32,7 +38,7 @@ while getopts "c:p:k:u:" opt; do
   esac
 done
 
-if [ -z "${consul_host}" ] || [ -z "${consul_port}" ] || [ -z "${key}" ]; then
+if [ -z "${consul_host}" ] || [ -z "${consul_port}" ] || [ -z "${admin_user}" ] || [ -z "${admin_password}" ] || [ -z "${key}" ]; then
     echo "Parameters missing"
     usage
 fi
@@ -51,8 +57,8 @@ value=$(echo "${consul_response}" | ./jq -r '.[]|.Value' | base64 --decode)
 echo "Checking if \"${user}\" exists"
 if curl -sL -w "%{http_code}\\n" "http://localhost:8080/gerrit/accounts/${user}" -o /dev/null | grep "404" &> /dev/null; then
     echo "Creating account: ${user}"
-    curl -X PUT -u gerrit:gerrit "http://localhost:8080/gerrit/a/accounts/${user}"
+    curl -X PUT -u "${admin_user}:${admin_password}" "http://localhost:8080/gerrit/a/accounts/${user}"
 fi
 
 echo "Uploading key to Gerrit user \"${user}\""
-curl -X POST -u gerrit:gerrit -d "${value}" "http://localhost:8080/gerrit/a/accounts/${user}/sshkeys"
+curl -X POST -u "${admin_user}:${admin_password}" -d "${value}" "http://localhost:8080/gerrit/a/accounts/${user}/sshkeys"
