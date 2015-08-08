@@ -38,7 +38,7 @@ while getopts "c:p:A:P:k:u:" opt; do
   esac
 done
 
-if [ -z "${consul_host}" ] || [ -z "${consul_port}" ] || [ -z "${admin_user}" ] || [ -z "${admin_password}" ] || [ -z "${key}" ]; then
+if [ -z "${consul_host}" ] || [ -z "${consul_port}" ] || [ -z "${admin_user}" ] || [ -z "${admin_password}" ] || [ -z "${key}" ] || [ -z "${user}" ]; then
     echo "Parameters missing"
     usage
 fi
