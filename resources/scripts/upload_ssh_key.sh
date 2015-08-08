@@ -56,8 +56,8 @@ value=$(echo "${consul_response}" | jq -r '.[]|.Value' | base64 --decode)
 
 echo "Checking if \"${user}\" exists"
 if curl -sL -w "%{http_code}\\n" "http://localhost:8080/gerrit/accounts/${user}" -o /dev/null | grep "404" &> /dev/null; then
-    echo "Creating account: ${user}"
-    curl -X PUT -u "${admin_user}:${admin_password}" "http://localhost:8080/gerrit/a/accounts/${user}"
+    echo "User does not exist: ${user}"
+    exit 1
 fi
 
 echo "Uploading key to Gerrit user \"${user}\""
