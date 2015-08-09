@@ -43,8 +43,8 @@ if [ -z "${consul_host}" ] || [ -z "${consul_port}" ] || [ -z "${admin_user}" ] 
     usage
 fi
 
-echo "Testing Consul Connection"
-until curl -sL -w "%{http_code}\\n" "http://${consul_host}:${consul_port}/v1/kv/?recurse" -o /dev/null | grep "200" &> /dev/null
+echo "Testing Consul Connection & Key Presence"
+until curl -sL -w "%{http_code}\\n" "http://${consul_host}:${consul_port}/v1/kv/${key}" -o /dev/null | grep "200" &> /dev/null
 do
     echo "Consul unavailable, sleeping for ${SLEEP_TIME}"
     sleep "${SLEEP_TIME}"
