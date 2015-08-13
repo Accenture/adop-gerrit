@@ -4,26 +4,20 @@ set -e
 # Usage
 usage() {
     echo "Usage:"
-    echo "    ${0} -A <ADMIN_USER> -P <ADMIN_PASSWORD> -u <USER> -e <EMAIL>"
+    echo "    ${0} -u <USER> -p <PASSWORD>"
     exit 1
 }
 
 # Constants
 SLEEP_TIME=5
 
-while getopts "A:P:u:e:" opt; do
+while getopts "c:p:k:u:" opt; do
   case $opt in
-    A)
-      admin_user=${OPTARG}
-      ;;
-    P)
-      admin_password=${OPTARG}
-      ;;
     u)
-      user=${OPTARG}
+      username=${OPTARG}
       ;;
-    e)
-      email=${OPTARG}
+    p)
+      password=${OPTARG}
       ;;
     *)
       echo "Invalid parameter(s) or option(s)."
@@ -32,20 +26,17 @@ while getopts "A:P:u:e:" opt; do
   esac
 done
 
-if [ -z "${admin_user}" ] || [ -z "${admin_password}" ] || [ -z "${user}" ] || [ -z "${email}" ]; then
+if [ -z "${username}" ] || [ -z "${password}" ]; then
     echo "Parameters missing"
     usage
 fi
 
 echo "Testing Gerrit Connection"
-until curl -sL -w "%{http_code}\\n" "http://localhost:8080/gerrit" -o /dev/null | grep "200" &> /dev/null
+until curl -sL -w "%{http_code}\\n" "http://localhost:8080/gerrit/login/%23/q/status:open" -o /dev/null | grep "401" &> /dev/null
 do
     echo "Gerrit unavailable, sleeping for ${SLEEP_TIME}"
     sleep "${SLEEP_TIME}"
 done
 
-echo "Creating account: ${user}"
-curl -X PUT -u "${admin_user}:${admin_password}" "http://localhost:8080/gerrit/a/accounts/${user}"
-
-echo "Setting email on account: ${email}"
-curl -X PUT -u "${admin_user}:${admin_password}" -H "Content-Type: application/json" -d '{"no_confirmation":"true"}' "http://localhost:8080/gerrit/a/accounts/${user}/emails/${email}"
+echo "Creating admin user: ${username}"
+curl -X POST --data "username=${username}&password=${password}" http://localhost:8080/gerrit/login/%23/q/status:open
