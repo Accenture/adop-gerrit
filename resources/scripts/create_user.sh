@@ -38,5 +38,5 @@ do
     sleep "${SLEEP_TIME}"
 done
 
-echo "Creating admin user: ${username}"
+echo "Creating user: ${username}"
 curl -X POST --data "username=${username}&password=${password}" http://localhost:8080/gerrit/login/%23/q/status:open
