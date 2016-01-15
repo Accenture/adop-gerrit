@@ -100,4 +100,8 @@ if [ "$1" = '/var/gerrit/gerrit-start.sh' ]; then
     cat "${GERRIT_SITE}/logs/error_log"
   fi
 fi
+
+echo "Starting gerrit init script"
+nohup /var/gerrit/adop\_scripts/gerrit_init.sh &
+
 exec "$@"

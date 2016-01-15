@@ -10,6 +10,7 @@ usage() {
 
 # Constants
 SLEEP_TIME=5
+MAX_RETRY=10
 
 while getopts "c:p:k:u:" opt; do
   case $opt in
@@ -39,4 +40,13 @@ do
 done
 
 echo "Creating user: ${username}"
-curl -X POST --data "username=${username}&password=${password}" http://localhost:8080/gerrit/login/%23/q/status:open
+count=1
+until [ $count -ge ${MAX_RETRY} ]
+do
+  ret=$(curl -X POST --data "username=${username}&password=${password}" --write-out "%{http_code}" --silent --output /dev/null http://localhost:8080/gerrit/login/%23/q/status:open)
+  # | grep 302  &> /dev/null && break
+  [[ ${ret} -eq 302  ]] && break
+  count=$[$count+1]
+  echo "Unable to create user ${username}, response code ${ret}, retry ... ${count}"
+  sleep ${SLEEP_TIME}
+done

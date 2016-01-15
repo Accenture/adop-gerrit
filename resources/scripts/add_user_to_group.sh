@@ -10,6 +10,7 @@ usage() {
 
 # Constants
 SLEEP_TIME=5
+MAX_RETRY=10
 
 while getopts "A:P:u:g:" opt; do
   case $opt in
@@ -47,4 +48,13 @@ done
 echo "Adding user \"${user}\" to: ${group}"
 # Escape the group name for the URL
 group=$(echo "${group}" | sed 's/ /%20/g')
-curl -X PUT -u "${admin_user}:${admin_password}" "http://localhost:8080/gerrit/a/groups/${group}/members/${user}"
+count=1
+until [ $count -ge ${MAX_RETRY} ]
+do
+    ret=$(curl -X PUT -u "${admin_user}:${admin_password}" --write-out "%{http_code}\\n" --silent --output /dev/null "http://localhost:8080/gerrit/a/groups/${group}/members/${user}")
+    # | grep "200" &> /dev/null && break
+    [[ ${ret} -eq 200  ]] && break
+    count=$[$count+1]
+    echo "Unable to add user ${user} to group ${group}, response code ${ret}, retry ... ${count}"
+    sleep ${SLEEP_TIME}
+done
