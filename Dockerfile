@@ -2,6 +2,11 @@ FROM openfrontier/gerrit:2.10.x
 
 MAINTAINER Nick Griffin, <nicholas.griffin>
 
+ENV GERRIT_USERNAME gerrit
+ENV GERRIT_PASSWORD gerrit
+ENV JENKINS_USERNAME jenkins
+ENV JENKINS_PASSWORD jenkins
+
 # Override entrypoint script
 USER root
 COPY resources/gerrit-entrypoint.sh ${GERRIT_HOME}/

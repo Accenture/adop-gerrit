@@ -10,7 +10,7 @@ usage() {
 
 # Constants
 SLEEP_TIME=5
-MAX_RETRY=10
+MAX_RETRY=2
 
 while getopts "c:p:k:u:" opt; do
   case $opt in
