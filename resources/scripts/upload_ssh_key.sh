@@ -4,7 +4,7 @@ set -e
 # Usage
 usage() {
     echo "Usage:"
-    echo "    ${0} -c <CONSUL_HOST> -p <CONSUL_PORT> -A <ADMIN_USER> -P <ADMIN_PASSWORD> -k <KEY> -u <USER>"
+    echo "    ${0} -c <host> -p <port> -A <username> -P <password> -k <KEY> -u <USER>"
     exit 1
 }
 
@@ -14,16 +14,16 @@ SLEEP_TIME=5
 while getopts "c:p:A:P:k:u:" opt; do
   case $opt in
     c)
-      consul_host=${OPTARG}
+      host=${OPTARG}
       ;;
     p)
-      consul_port=${OPTARG}
+      port=${OPTARG}
       ;;
     A)
-      admin_user=${OPTARG}
+      username=${OPTARG}
       ;;
     P)
-      admin_password=${OPTARG}
+      password=${OPTARG}
       ;;
     k)
       key=${OPTARG}
@@ -38,21 +38,23 @@ while getopts "c:p:A:P:k:u:" opt; do
   esac
 done
 
-if [ -z "${consul_host}" ] || [ -z "${consul_port}" ] || [ -z "${admin_user}" ] || [ -z "${admin_password}" ] || [ -z "${key}" ] || [ -z "${user}" ]; then
+if [ -z "${host}" ] || [ -z "${port}" ] || [ -z "${username}" ] || [ -z "${password}" ] || [ -z "${key}" ] || [ -z "${user}" ]; then
     echo "Parameters missing"
     usage
 fi
 
-echo "Testing Consul Connection & Key Presence"
-until curl -sL -w "%{http_code}\\n" "http://${consul_host}:${consul_port}/v1/kv/${key}" -o /dev/null | grep "200" &> /dev/null
+echo "Testing Jenkins Connection & Key Presence"
+until curl -sL --output /dev/null --silent --write-out "%{http_code}\\n" \
+    -u ${username}:${password} \
+    "http://${host}:${port}/jenkins/userContent/${key}" -o /dev/null | grep "200" &> /dev/null
 do
-    echo "Consul or key unavailable, sleeping for ${SLEEP_TIME}"
+    echo "Jenkins or key unavailable, sleeping for ${SLEEP_TIME}"
     sleep "${SLEEP_TIME}"
 done
 
 echo "Retrieving value: ${key}"
-consul_response=$(curl -s -X GET "http://${consul_host}:${consul_port}/v1/kv/${key}")
-value=$(echo "${consul_response}" | jq -r '.[]|.Value' | base64 --decode)
+ssh_key=$(curl -s -X GET -u ${username}:${password} "http://${host}:${port}/jenkins/userContent/${key}")
+# value=$(echo "${ssh_key}" | jq -r '.[]|.Value' | base64 --decode)
 
 echo "Checking if \"${user}\" exists"
 if curl -sL -w "%{http_code}\\n" "http://localhost:8080/gerrit/accounts/${user}" -o /dev/null | grep "404" &> /dev/null; then
@@ -61,4 +63,4 @@ if curl -sL -w "%{http_code}\\n" "http://localhost:8080/gerrit/accounts/${user}"
 fi
 
 echo "Uploading key to Gerrit user \"${user}\""
-curl -X POST -u "${admin_user}:${admin_password}" -d "${value}" "http://localhost:8080/gerrit/a/accounts/${user}/sshkeys"
+curl -X POST -u "${username}:${password}" -d "${ssh_key}" "http://localhost:8080/gerrit/a/accounts/${user}/sshkeys"
