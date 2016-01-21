@@ -9,8 +9,8 @@ usage() {
 }
 
 # Constants
-SLEEP_TIME=5
-MAX_RETRY=2
+SLEEP_TIME=10
+MAX_RETRY=3
 
 while getopts "c:p:k:u:" opt; do
   case $opt in
@@ -40,7 +40,7 @@ do
 done
 
 echo "Creating user: ${username}"
-count=1
+count=0
 until [ $count -ge ${MAX_RETRY} ]
 do
   ret=$(curl -X POST --data "username=${username}&password=${password}" --write-out "%{http_code}" --silent --output /dev/null http://localhost:8080/gerrit/login/%23/q/status:open)

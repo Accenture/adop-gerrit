@@ -9,7 +9,7 @@ usage() {
 }
 
 # Constants
-SLEEP_TIME=5
+SLEEP_TIME=10
 
 while getopts "c:p:A:P:k:u:" opt; do
   case $opt in
