@@ -1,15 +1,15 @@
 #Supported tags and respective Dockerfile links
 
-- [`0.0.10`, `0.0.10` (*0.0.10/Dockerfile*)](https://innersource.accenture.com/adop/docker-gerrit/source/51a674d192a10dedee5a3330af2cd20d40741754:Dockerfile)
+- [`0.1.0`, `0.1.0` (*0.1.0/Dockerfile*)](https://github.com/Accenture/adop-gerrit/blob/master/Dockerfile.md)
 
 # What is docker-gerrit?
 
-docker-gerrit is a wrapper for the openfrontier/gerrit image. It has primarily been built to perform extended configuration.
+adop-gerrit is a wrapper for the openfrontier/gerrit image. It has primarily been built to perform extended configuration.
 Gerrit, web-based collaboration tool. Gerrit aims to facilitate reviews of source code in the context of a software developers in a team.
 
 # How to use this image
 
-The easiest for to run docker-gerrit image is as follow:
+The easiest for to run adop-gerrit image is as follow:
 ```
 docker run --name <your-container-name> -d -p 8080:8080 -p 29418:29418 docker.accenture.com/adop/docker-gerrit:VERSION
 ```
@@ -18,7 +18,7 @@ after the above gerrit will be available at: http://localhost:8080
 ## Run docker-gerrit with MySQL and OpenLDAP
 The following assumes that MySQL and OpenLDAP are running.
 
-The following command will run docker-gerrit and connect it to MySQL and OpenLDAP
+The following command will run adop-gerrit and connect it to MySQL and OpenLDAP
 ```
   docker run \
   --name adop-gerrit \
@@ -33,7 +33,7 @@ The following command will run docker-gerrit and connect it to MySQL and OpenLDA
   -e AUTH_TYPE=LDAP \
   -e LDAP_SERVER=<ldap-servername:389> \
   -e LDAP_ACCOUNTBASE=<ldap-basedn> \
-  -d docker.accenture.com/adop/docker-gerrit:VERSION
+  -d adop/gerrit:VERSION
 ```
 
 In addition all the LDAP attibutes defined in [Gerrid LDAP](https://gerrit-review.googlesource.com/Documentation/config-gerrit.html#ldap) are supported.
