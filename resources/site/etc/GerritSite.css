@@ -1,0 +1,371 @@
+
+
+body{
+    background: rgba(183, 205, 209, 0.35) !important;
+    margin: 0 !important;
+    color: #696868;
+}
+
+td {
+    font-size: 14px;
+}
+
+/* header */
+#gerrit_topmenu{
+    background-color: #09A4C7;
+    padding: 15px 0.5%;
+    padding-left: 9.5%;
+    min-height: 80px;
+    min-width: 1111px;
+    width: 90%;
+}
+
+#gerrit_topmenu .topmenuTDglue{
+    width: 4%;
+}
+
+#gerrit_topmenu .topmenu{
+    width: 100%;
+    table-layout: fixed;
+}
+
+#gerrit_topmenu .topmenuTDmenu{
+    vertical-align: inherit;
+}
+
+#gerrit_topmenu .topmenuMenuLeft .gwt-TabPanelBottom{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#gerrit_topmenu .linkMenuItemNotLast {
+    border-right: 1px solid #07758E;
+    box-shadow: 1px 0 0 #52BFD8;
+}
+#gerrit_topmenu .gwt-TabPanelBottom .linkMenuItemNotLast {
+    border-right: none;
+    box-shadow: none;
+}
+
+
+#gerrit_topmenu .menuItem.activeRow {
+    background: rgba(73, 198, 198, 0.56);
+}
+
+#gerrit_topmenu .menuScreenMenuBar .menuItem.activeRow, 
+    #gerrit_topmenu .gwt-TabBarItem-wrapper.gwt-TabBarItem-wrapper-selected {
+    background: rgba(100, 109, 109, 0.56);
+    border-bottom: none;
+}
+
+#gerrit_topmenu .gwt-TabBar .gwt-TabBarItem{
+    color: #f5f5f5;
+    font: 18px Helvetica, Arial, sans-serif;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#gerrit_topmenu .gwt-TabBar .gwt-TabBarItem:hover{
+    background: #646D6D;
+}
+
+
+#gerrit_topmenu .linkMenuBar a, #gerrit_topmenu .linkMenuBar a:visited{
+    font: 16px Helvetica, Arial, sans-serif;
+    color: #f5f5f5;
+    padding: 10px;
+}
+#gerrit_topmenu .linkMenuBar a:hover{
+    color: #EBFB00;
+    text-decoration: none;
+}
+
+#gerrit_topmenu .searchPanel input.gwt-TextBox {
+    width: 200px;
+    padding: 8px 10px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.3;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+#gerrit_topmenu .searchPanel .gwt-Button{
+    color: #f5f5f5;
+    background-color: #07758E;
+    border-color: #ccc;
+    display: inline-block;
+    padding: 8px 10px;
+    margin-bottom: 0;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.3;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    background-image: none;
+    border-radius: 4px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    z-index: 2;
+    margin-left: -1px;
+    margin-top: -4px;
+}
+#gerrit_topmenu .searchPanel .gwt-Button:hover {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+#gerrit_topmenu .menuBarUserNamePanel {
+    padding: 0 10px;
+    color: #F5F5ED;
+    font-size: 16px;
+}
+
+/* logo */
+#gerrit_header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-left: 15px;
+}
+#gerrit_header h2{
+    background: url("/gerrit/static/gerrit-logo.cache.png") no-repeat;
+    width: 150px;
+    height: 120px;
+    background-size: contain;
+    margin: 0;
+}
+
+@media (max-width: 1500px){
+    #gerrit_topmenu{
+        padding-left: 150px;
+    }    
+}
+
+/* body */
+#gerrit_body{
+    padding: 20px;
+}
+
+#gerrit_body .screenHeader {
+    margin: 0;
+    font-size: 28px;
+}
+
+#gerrit_body table.screenHeader {
+    margin: 0px 0px 10px 0px;
+    background: #F3F9FB;
+    padding: 10px 5px;
+    color: #035E73;
+    border-radius: 3px;
+}
+
+h1 {
+    font-family: sans-serif;
+    color: #035E73;
+}
+
+/*sign in page*/
+#gerrit_body > h1{
+    text-align: center;
+}
+
+#login_form {
+    text-align: center;
+    font-size: 22px;
+    font-family: Helvetica, Arial, sans-serif;
+}
+#logo_box {
+    padding: 10px 0 20px;
+}
+
+#f_openid{
+    height: 34px;
+    padding: 6px 12px 6px 35px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+    background-color: #fff;
+    background-position-x: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);    
+}
+
+input#f_remember {
+    -ms-transform: scale(1.7);
+    -moz-transform: scale(1.7);
+    -webkit-transform: scale(1.7);
+    -o-transform: scale(1.7);
+    padding: 10px;
+    margin: 20px 20px 30px 0;
+}
+
+label[for=f_remember] {
+    font-size: 21px;
+    font-family: Helvetica, Arial, sans-serif;
+    text-transform: lowercase; 
+}
+
+input#f_submit {
+    padding: 9px 17px;
+    margin-bottom: 0;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+#gerrit_body a{
+    color: #FF6200;
+    text-decoration: none;
+}
+
+#gerrit_body a:hover{
+    text-decoration: underline;
+}
+
+div#providers {
+    margin-top: 50px;
+}
+div#providers:before {
+    content: "or sign in with:";
+}
+
+#provider_launchpad{
+    margin: 20px 0 30px;
+}
+#provider_yahoo{
+    margin: 20px 0 60px;
+}
+#provider_launchpad img,
+    #provider_yahoo img{
+    height: 25px;
+    width: 25px;
+    position: relative;
+    left: -12px;
+    top: 3px;
+}
+
+#error_message {
+    margin: 20px auto;
+}
+
+/* MAIN TABLE */
+
+#gerrit_body .changeTable {
+    margin: 10px 0;
+}
+#gerrit_body .changeTable .dataHeader {
+    border: 1px solid #0591B1;
+    padding: 8px;
+    background-color: #09A4C7;
+    font-style: normal;
+    white-space: nowrap;
+    color: #FBFAFA;
+    font-size: 18px;
+}
+
+#gerrit_body .changeTable .dataCell {
+    vertical-align: middle;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid rgba(5, 145, 177, 0.12);
+}
+
+#gerrit_body .changeTable tbody tr:nth-child(odd) td.dataCell{
+   background-color: #D9E4E8;
+}
+
+/*USER SETTINGS PAGES
+**************************/
+
+#gerrit_body .menuScreenMenuBar {
+    background: #F3F9FB;
+    padding: 15px 15px 150px;
+    border-right: 4px solid #09A4C7;
+        margin-right: 50px;
+}
+
+#gerrit_body .menuScreenMenuBar a.menuItem {
+    color: #09A4C7;
+    padding: 0.5em 0.8em;
+    font-size: 16px;
+}
+
+#gerrit_body .menuScreenMenuBar .menuItem.activeRow {
+    background: rgba(216, 237, 249, 0.58);
+}
+
+.infoBlock.accountInfoBlock {
+    font-size: 14px;
+}
+table.infoBlock.accountInfoBlock td {
+    padding: 8px;
+}
+
+/*preferences*/
+#gerrit_body .smallHeading {
+    margin: 30px 0 10px;
+    color: #035E73;
+    font-size: 16px;
+        text-transform: uppercase;
+}
+
+.stringListPanelButtons button.gwt-Button,
+    button.gwt-Button{
+    color: #f5f5f5;
+    background: none;
+    background-color: #07758E;
+    border-color: #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 4px;
+    z-index: 2;
+}
+button.gwt-Button[disabled]{
+    background-color: rgba(7, 117, 142, 0.69);
+    color: #D4DBDC;
+}
+
+table.stringListPanelButtons {
+    margin: 20px 0;
+}
+
+select.gwt-ListBox,
+  input[type=text]{
+    font-size: 14px;
+    padding: 3px;
+    margin: 3px 0;
+}
+.gwt-TextBox{
+    width: 200px;
+}
+
+.infoTable, .infoBlock {
+    margin: 10px 0 20px;
+}
+
+/*PROJECTS*/
+.com-google-gerrit-client-admin-ProjectAccessEditor_BinderImpl_GenCss_style-inheritsFrom,
+.com-google-gerrit-client-admin-ProjectAccessEditor_BinderImpl_GenCss_style-history {
+    margin-top: 1em;
+}

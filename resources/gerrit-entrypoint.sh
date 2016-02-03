@@ -8,6 +8,9 @@ if [ "$1" = '/var/gerrit/gerrit-start.sh' ]; then
     java -jar "${GERRIT_WAR}" init --batch --no-auto-start -d "${GERRIT_SITE}"
     #All git repositories must be removed in order to be recreated at the secondary init below.
     rm -rf "${GERRIT_SITE}/git"
+
+    # Add site extensions
+    cp -uR ${GERRIT_HOME}/site_ext/* ${GERRIT_SITE}/
   fi
 
   #Customize gerrit.config

@@ -17,4 +17,7 @@ RUN chmod +x ${GERRIT_HOME}/gerrit*.sh
 COPY resources/scripts/ ${GERRIT_HOME}/adop_scripts/
 RUN chmod -R +x ${GERRIT_HOME}/adop_scripts/
 
+# Add site content
+COPY resources/site/ ${GERRIT_HOME}/site_ext/
+
 USER $GERRIT_USER
