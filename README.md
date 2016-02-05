@@ -11,7 +11,7 @@ Gerrit, web-based collaboration tool. Gerrit aims to facilitate reviews of sourc
 
 The easiest for to run adop-gerrit image is as follow:
 ```
-docker run --name <your-container-name> -d -p 8080:8080 -p 29418:29418 docker.accenture.com/adop/docker-gerrit:VERSION
+docker run --name <your-container-name> -d -p 8080:8080 -p 29418:29418 accenture/adop-docker-gerrit:VERSION
 ```
 after the above gerrit will be available at: http://localhost:8080
 
@@ -26,14 +26,14 @@ The following command will run adop-gerrit and connect it to MySQL and OpenLDAP
   -p 29418:29418 \
   -e DATABASE_TYPE=mysql \
   -e DB_HOSTNAME=<mysql-servername> 
-  -e DB_PORT="3306"
-  -e DB_NAME=<mysql-dbame>
-  -e DB_USER=<mysql-dbuser>
-  -e DB_PASSWORD=<mysql-dbpassword>
-  -e AUTH_TYPE=LDAP \
-  -e LDAP_SERVER=<ldap-servername:389> \
-  -e LDAP_ACCOUNTBASE=<ldap-basedn> \
-  -d adop/gerrit:VERSION
+  -e DB\_PORT="3306"
+  -e DB\_NAME=<mysql-dbame>
+  -e DB\_USER=<mysql-dbuser>
+  -e DB\_PASSWORD=<mysql-dbpassword>
+  -e AUTH\_TYPE=LDAP \
+  -e LDAP\_SERVER=<ldap-servername:389> \
+  -e LDAP\_ACCOUNTBASE=<ldap-basedn> \
+  -d accenture/adop-gerrit:VERSION
 ```
 
 In addition all the LDAP attibutes defined in [Gerrid LDAP](https://gerrit-review.googlesource.com/Documentation/config-gerrit.html#ldap) are supported.
