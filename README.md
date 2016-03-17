@@ -9,7 +9,7 @@ Gerrit, web-based collaboration tool. Gerrit aims to facilitate reviews of sourc
 
 # How to use this image
 
-The easiest for to run adop-gerrit image is as follow:
+The easiest way to run adop-gerrit image is as follow:
 ```
 docker run --name <your-container-name> -d -p 8080:8080 -p 29418:29418 accenture/adop-docker-gerrit:VERSION
 ```
@@ -36,7 +36,7 @@ The following command will run adop-gerrit and connect it to MySQL and OpenLDAP
   -d accenture/adop-gerrit:VERSION
 ```
 
-In addition all the LDAP attibutes defined in [Gerrid LDAP](https://gerrit-review.googlesource.com/Documentation/config-gerrit.html#ldap) are supported.
+In addition all the LDAP attibutes defined in [Gerrit LDAP](https://gerrit-review.googlesource.com/Documentation/config-gerrit.html#ldap) are supported.
 
 # License
 Please view [licence information](LICENCE.md) for the software contained on this image.
