@@ -64,7 +64,7 @@ fi
 echo "*** Verify key already exists... Gerrit does not do this ..."
 # Download the stored key and decode from to UTF-8 using echo -e the -n switch from echo allows to remove the trailing \n that echo would add.
 # The decode part is necessary as Gerrit correctly encode the SSH key and as a result = sign is converted to \u003d
-stored_key=$(echo -e $(curl -u jenkins:jenkins --silent http://localhost:8080/gerrit/a/accounts/self/sshkeys | grep "ssh_public_key" | awk '{split($0, a, ": "); print a[2]}' | sed 's/[",]//g'))
+stored_key=$(echo -e $(curl -u ${username}:${password} --silent http://localhost:8080/gerrit/a/accounts/self/sshkeys | grep "ssh_public_key" | awk '{split($0, a, ": "); print a[2]}' | sed 's/[",]//g'))
 echo "****** Found stored key, verify if is same are downloaded ..."
 [[ "$stored_key" == "$ssh_key" ]] && exit 0 || echo "****** Stored key is not same as downloaded, uploading it ..."
 
