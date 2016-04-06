@@ -39,7 +39,7 @@ if [ -z "${admin_user}" ] || [ -z "${admin_password}" ] || [ -z "${user}" ] || [
 fi
 
 echo "Testing Gerrit Connection"
-until curl -sL -w "%{http_code}\\n" "http://localhost:8080/gerrit" -o /dev/null | grep "200" &> /dev/null
+until curl -sL -w "%{http_code}\\n" "http://localhost:8080/gerrit/" -o /dev/null | grep "200" &> /dev/null
 do
     echo "Gerrit unavailable, sleeping for ${SLEEP_TIME}"
     sleep "${SLEEP_TIME}"
