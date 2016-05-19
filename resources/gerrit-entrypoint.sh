@@ -38,9 +38,10 @@ if [ "$1" = '/var/gerrit/gerrit-start.sh' ]; then
 
   #Section auth
   [ -z "${AUTH_LOGOUTURL}" ] || git config -f "${GERRIT_SITE}/etc/gerrit.config" auth.logoutUrl "${AUTH_LOGOUTURL}"
+  [ -z "${AUTH_TRUST_CONTAINER_AUTH}" ] || git config -f "${GERRIT_SITE}/etc/gerrit.config" auth.trustContainerAuth "${AUTH_TRUST_CONTAINER_AUTH}"
 
   #Section ldap
-  if [ "${AUTH_TYPE}" = 'LDAP' ]; then
+  if [ "${AUTH_TYPE}" = 'LDAP' ] || [ "${AUTH_TYPE}" = 'HTTP_LDAP' ]; then
     git config -f "${GERRIT_SITE}/etc/gerrit.config" auth.type "${AUTH_TYPE}"
     git config -f "${GERRIT_SITE}/etc/gerrit.config" auth.gitBasicAuth true
     [ -z "${LDAP_SERVER}" ] || git config -f "${GERRIT_SITE}/etc/gerrit.config" ldap.server "ldap://${LDAP_SERVER}"
