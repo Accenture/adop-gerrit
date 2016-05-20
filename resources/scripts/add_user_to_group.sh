@@ -4,7 +4,7 @@ set -e
 # Usage
 usage() {
     echo "Usage:"
-    echo "    ${0} -A <ADMIN_USER> -P <ADMIN_PASSWORD> -u <USER> -g <GROUP>"
+    echo "    ${0} -A <ADMIN_USER> -P <ADMIN_PASSWORD> -u <USER> -b <GERRIT_PREFIX> -g <GROUP>"
     exit 1
 }
 
@@ -12,7 +12,7 @@ usage() {
 SLEEP_TIME=10
 MAX_RETRY=3
 
-while getopts "A:P:u:g:" opt; do
+while getopts "A:P:u:b:g:" opt; do
   case $opt in
     A)
       admin_user=${OPTARG}
@@ -22,6 +22,9 @@ while getopts "A:P:u:g:" opt; do
       ;;
     u)
       user=${OPTARG}
+      ;;
+    b)
+      gerrit_prefix=${OPTARG}
       ;;
     g)
       group=${OPTARG}
@@ -33,13 +36,13 @@ while getopts "A:P:u:g:" opt; do
   esac
 done
 
-if [ -z "${admin_user}" ] || [ -z "${admin_password}" ] || [ -z "${user}" ] || [ -z "${group}" ]; then
+if [ -z "${admin_user}" ] || [ -z "${admin_password}" ] || [ -z "${user}" ] || [ -z "${gerrit_prefix}" ] || [ -z "${group}" ]; then
     echo "Parameters missing"
     usage
 fi
 
 echo "Testing Gerrit Connection"
-until curl -sL -w "%{http_code}\\n" "http://localhost:8080/gerrit/" -o /dev/null | grep "200" &> /dev/null
+until curl -sL -w "%{http_code}\\n" "http://localhost:8080/${gerrit_prefix}/" -o /dev/null | grep "200" &> /dev/null
 do
     echo "Gerrit unavailable, sleeping for ${SLEEP_TIME}"
     sleep "${SLEEP_TIME}"
@@ -51,7 +54,7 @@ group=$(echo "${group}" | sed 's/ /%20/g')
 count=0
 until [ $count -ge ${MAX_RETRY} ]
 do
-    ret=$(curl -X PUT -u "${admin_user}:${admin_password}" --write-out "%{http_code}\\n" --silent --output /dev/null "http://localhost:8080/gerrit/a/groups/${group}/members/${user}")
+    ret=$(curl -X PUT -u "${admin_user}:${admin_password}" --write-out "%{http_code}\\n" --silent --output /dev/null "http://localhost:8080/${gerrit_prefix}/a/groups/${group}/members/${user}")
     # | grep "200" &> /dev/null && break
     [[ ${ret} -eq 200  ]] && break
     count=$[$count+1]

@@ -7,6 +7,8 @@ ENV GERRIT_USERNAME gerrit
 ENV GERRIT_PASSWORD gerrit
 ENV JENKINS_USERNAME jenkins
 ENV JENKINS_PASSWORD jenkins
+ENV JENKINS_PREFIX jenkins
+ENV GERRIT_PREFIX gerrit
 
 # Override entrypoint script
 USER root
