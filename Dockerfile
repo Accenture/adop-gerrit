@@ -13,6 +13,9 @@ USER root
 COPY resources/gerrit-entrypoint.sh ${GERRIT_HOME}/
 RUN chmod +x ${GERRIT_HOME}/gerrit*.sh
 
+# Add libraries
+COPY resources/lib/mysql-connector-java-5.1.21.jar ${GERRIT_HOME}/site_ext/lib/mysql-connector-java-5.1.21.jar
+
 # Add utility scripts
 COPY resources/scripts/ ${GERRIT_HOME}/adop_scripts/
 RUN chmod -R +x ${GERRIT_HOME}/adop_scripts/
