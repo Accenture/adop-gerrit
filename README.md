@@ -15,6 +15,11 @@ docker run --name <your-container-name> -d -p 8080:8080 -p 29418:29418 accenture
 ```
 after the above gerrit will be available at: http://localhost:8080
 
+Runtime configuration can be provided using environment variables:
+
+* ADOP_INTERNAL_LDAP, Allowed values true(default) and false. This parameter identifies whether ADOP internal LDAP is used or not. If set to false, required local users are created in gerrit.
+* LDAP_PROTOCOL, allowed values ldap(default) and ldaps
+
 ## Run docker-gerrit with MySQL and OpenLDAP
 The following assumes that MySQL and OpenLDAP are running.
 
@@ -25,7 +30,7 @@ The following command will run adop-gerrit and connect it to MySQL and OpenLDAP
   -p 8080:8080 \
   -p 29418:29418 \
   -e DATABASE_TYPE=mysql \
-  -e DB_HOSTNAME=<mysql-servername> 
+  -e DB_HOSTNAME=<mysql-servername>
   -e DB\_PORT="3306"
   -e DB\_NAME=<mysql-dbame>
   -e DB\_USER=<mysql-dbuser>
@@ -49,7 +54,7 @@ Support for older versions (down to 1.6) is provided on a best-effort basis.
 # User feedback
 
 ## Documentation
-Documentation for this image is available in the [Gerrit documenation page](https://gerrit-review.googlesource.com/Documentation/config-gerrit.html). 
+Documentation for this image is available in the [Gerrit documenation page](https://gerrit-review.googlesource.com/Documentation/config-gerrit.html).
 Additional documentaion can be found under the [`docker-library/docs` GitHub repo](https://github.com/docker-library/docs). Be sure to familiarize yourself with the [repository's `README.md` file](https://github.com/docker-library/docs/blob/master/README.md) before attempting a pull request.
 
 ## Issues

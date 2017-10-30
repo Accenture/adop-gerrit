@@ -9,6 +9,7 @@ ENV JENKINS_USERNAME jenkins
 ENV JENKINS_PASSWORD jenkins
 ENV JENKINS_PREFIX jenkins
 ENV GERRIT_PREFIX gerrit
+ENV LDAP_PROTOCOL=ldap ADOP_INTERNAL_LDAP=true
 
 # Override entrypoint script
 USER root
