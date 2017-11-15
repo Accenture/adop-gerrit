@@ -45,7 +45,7 @@ if [ "$1" = '/var/gerrit/gerrit-start.sh' ]; then
   if [ "${AUTH_TYPE}" = 'LDAP' ] || [ "${AUTH_TYPE}" = 'HTTP_LDAP' ]; then
     git config -f "${GERRIT_SITE}/etc/gerrit.config" auth.type "${AUTH_TYPE}"
     git config -f "${GERRIT_SITE}/etc/gerrit.config" auth.gitBasicAuth true
-    [ -z "${LDAP_SERVER}" ] || git config -f "${GERRIT_SITE}/etc/gerrit.config" ldap.server "ldap://${LDAP_SERVER}"
+    [ -z "${LDAP_SERVER}" ] || git config -f "${GERRIT_SITE}/etc/gerrit.config" ldap.server "${LDAP_PROTOCOL}://${LDAP_SERVER}"
     [ -z "${LDAP_SSLVERIFY}" ] || git config -f "${GERRIT_SITE}/etc/gerrit.config" ldap.sslVerify "${LDAP_SSLVERIFY}"
     [ -z "${LDAP_GROUPSVISIBLETOALL}" ] || git config -f "${GERRIT_SITE}/etc/gerrit.config" ldap.groupsVisibleToAll "${LDAP_GROUPSVISIBLETOALL}"
     [ -z "${LDAP_USERNAME}" ] || git config -f "${GERRIT_SITE}/etc/gerrit.config" ldap.username "${LDAP_USERNAME}"
