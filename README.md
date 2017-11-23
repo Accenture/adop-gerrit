@@ -19,6 +19,7 @@ Runtime configuration can be provided using environment variables:
 
 * ADOP_INTERNAL_LDAP, Allowed values true(default) and false. This parameter identifies whether ADOP internal LDAP is used or not. If set to false, required local users are created in gerrit.
 * LDAP_PROTOCOL, allowed values ldap(default) and ldaps
+* LDAP_USER_ID, String parameter - object attribute that is used to identify users, value cn(default).
 
 ## Run docker-gerrit with MySQL and OpenLDAP
 The following assumes that MySQL and OpenLDAP are running.

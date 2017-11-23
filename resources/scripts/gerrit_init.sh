@@ -6,7 +6,7 @@ if [ ${ADOP_INTERNAL_LDAP} = false ]; then
   # Execute when we are using not ADOP LDAP. It means that LDAP don't have local Jenkins and Gerrit users so we need to create.
 
   # To get only username we need to trim ${LDAP_USERNAME} because it comes with BASE_DN.
-  _LDAP_USERNAME=$(echo ${LDAP_USERNAME} | awk -F ',' '{print $1}' | grep -o -P '(?<=cn=)(.+)')
+  _LDAP_USERNAME=$(echo ${LDAP_USERNAME} | awk -F ',' '{print $1}' | grep -o -P "(?<=${LDAP_USER_ID}=)(.+)")
   # Activate LDAP user in Gerrit.
   /var/gerrit/adop\_scripts/create\_user.sh -u ${_LDAP_USERNAME} -p ${LDAP_PASSWORD} -b ${GERRIT_PREFIX}
 
