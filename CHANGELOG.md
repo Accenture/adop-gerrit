@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 0.1.6 - 2015-11-27
 ### Added
-- LDAP_USER_ID parameter introduced to compliment new feature in 0.1.5
+- LDAP_USER_ID_ATTRIBUTE parameter introduced to compliment new feature in 0.1.5
 
 ## 0.1.5 - 2017-11-12
 ### Added
