@@ -18,6 +18,7 @@ RUN chmod +x ${GERRIT_HOME}/gerrit*.sh
 
 # Add libraries
 COPY resources/lib/mysql-connector-java-5.1.21.jar ${GERRIT_HOME}/site_ext/lib/mysql-connector-java-5.1.21.jar
+COPY resources/lib/delete-project.jar ${GERRIT_HOME}/review_site/plugins/delete-project.jar
 
 # Add utility scripts
 COPY resources/scripts/ ${GERRIT_HOME}/adop_scripts/
