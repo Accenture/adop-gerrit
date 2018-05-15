@@ -30,6 +30,7 @@ td {
 }
 
 #gerrit_topmenu .topmenuTDmenu{
+    width: 4%
     vertical-align: inherit;
 }
 
@@ -79,7 +80,9 @@ td {
     color: #EBFB00;
     text-decoration: none;
 }
-
+#gerrit_topmenu .searchPanel input.searchTextBox {
+    width: 300px;
+}
 #gerrit_topmenu .searchPanel input.gwt-TextBox {
     width: 200px;
     padding: 8px 10px;
@@ -129,7 +132,13 @@ td {
     color: #F5F5ED;
     font-size: 16px;
 }
-
+#gerrit_topmenu .gwt-InlineLabel {
+    display:inline-block;
+    padding: 0 10px;
+    color: #F5F5ED;
+    font-size: 14px;
+    z-index: 2;
+}
 /* logo */
 #gerrit_header{
     position: absolute;
@@ -287,7 +296,7 @@ div#providers:before {
 }
 
 /*USER SETTINGS PAGES
-**************************/
+ *  * **************************/
 
 #gerrit_body .menuScreenMenuBar {
     background: #F3F9FB;
@@ -369,3 +378,6 @@ select.gwt-ListBox,
 .com-google-gerrit-client-admin-ProjectAccessEditor_BinderImpl_GenCss_style-history {
     margin-top: 1em;
 }
+
+
+

@@ -68,11 +68,21 @@ if curl -sL -w "%{http_code}\\n" "http://localhost:8080/${gerrit_prefix}/account
 fi
 
 echo "*** Verify key already exists... Gerrit does not do this ..."
-# Download the stored key and decode from to UTF-8 using echo -e the -n switch from echo allows to remove the trailing \n that echo would add.
+# Download the stored key and decode from to UTF-8
+# Using echo -e the -n switch from echo allows to remove the trailing \n that echo would add
 # The decode part is necessary as Gerrit correctly encode the SSH key and as a result = sign is converted to \u003d
 stored_key=$(echo -e $(curl -u ${username}:${password} --silent http://localhost:8080/${gerrit_prefix}/a/accounts/self/sshkeys | grep "ssh_public_key" | awk '{split($0, a, ": "); print a[2]}' | sed 's/[",]//g'))
-echo "****** Found stored key, verify if is same are downloaded ..."
-[[ "$stored_key" == "$ssh_key" ]] && exit 0 || echo "****** Stored key is not same as downloaded, uploading it ..."
+if [[ "$stored_key" == "$ssh_key" ]]; then
+  echo "* Stored key is the same as downloaded, skipping it ..."
+  exit 0
+else
+  echo "* Stored key is not same as downloaded, uploading it ..."
+fi
 
-echo "Uploading key to Gerrit user \"${user}\""
-curl -X POST -u "${username}:${password}" -d "${ssh_key}" "http://localhost:8080/${gerrit_prefix}/a/accounts/${user}/sshkeys"
+echo "Uploading public-key to Gerrit user \"${user}\""
+ret=$(curl -X POST -u "${username}:${password}" -d "${ssh_key}" --output /dev/null --silent --write-out "%{http_code}" "http://localhost:8080/${gerrit_prefix}/a/accounts/${user}/sshkeys")
+if [[ ${ret} -eq 201 ]]; then
+  echo "Public-key was uploaded"
+else
+  echo "Public-key was uploaded with the invalid response code: ${ret}"
+fi
